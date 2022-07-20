@@ -15,14 +15,14 @@ User.create([{ name: 'Alice' }, { name: 'Bob'}, {name: 'James'}])
   rand = rand(0..7)
   user = User.order('RANDOM()').first
   post = Post.create(
-    title: Faker::Lorem.sentence(3),
+    title: Faker::Lorem.sentence(word_count: 3),
     content: Faker::Lorem.paragraphs,
-    image: Faker::LoremPixel.image('300x200'),
+    image: 'https://picsum.photos/200/300',
     user: user
   )
   rand.times do
     post.comments.create(
-      content: Faker::Lorem.sentence(3),
+      content: Faker::Lorem.sentence(word_count: 3),
       user: User.where.not(id: user.id).order('RANDOM()').first
     )
   post.save
